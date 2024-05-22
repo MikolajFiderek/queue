@@ -32,7 +32,7 @@ int usun() {
     }
     int value = queue[front];
     if (front == rear) {
-        front = rear = -1;  // Kolejka jest teraz pusta
+        front = rear = -1;
     } else {
         front = (front + 1) % MAX;
     }

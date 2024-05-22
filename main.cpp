@@ -7,7 +7,8 @@ int main() {
     do {
         printf("\n1. Dodaj liczbe do kolejki\n");
         printf("2. Usun wartosc z kolejki\n");
-        printf("3. Koniec programu\n");
+        printf("3. Sprawdz pierwsza wartosc z kolejki\n");
+        printf("4. Koniec programu\n");
         printf("Wybierz opcje: ");
         scanf("%d", &choice);
 
@@ -23,13 +24,18 @@ int main() {
                     printf("Usunieto wartosc: %d\n", value);
                 break;
             case 3:
+                value = pierwszaWartosc();
+                if (value != -1)
+                    printf("Pierwsza wartosc w kolejce: %d\n", value);
+                break;
+            case 4:
                 printf("Koniec programu\n");
                 break;
             default:
                 printf("Niepoprawna opcja\n");
                 break;
         }
-    } while (choice != 3);
+    } while (choice != 4);
 
     return 0;
 }
