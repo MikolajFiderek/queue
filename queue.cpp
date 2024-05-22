@@ -25,3 +25,24 @@ void dodaj(int value) {
     queue[rear] = value;
     printf("%d dodano do kolejki\n", value);
 }
+int usun() {
+    if (czyPusta()) {
+        printf("Kolejka jest pusta\n");
+        return -1;
+    }
+    int value = queue[front];
+    if (front == rear) {
+        front = rear = -1;  // Kolejka jest teraz pusta
+    } else {
+        front = (front + 1) % MAX;
+    }
+    return value;
+}
+
+int pierwszaWartosc() {
+    if (czyPusta()) {
+        printf("Kolejka jest pusta\n");
+        return -1;
+    }
+    return queue[front];
+}

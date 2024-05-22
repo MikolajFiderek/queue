@@ -7,5 +7,7 @@
 int czyPelna();
 int czyPusta();
 void dodaj(int value);
+int usun();
+int pierwszaWartosc();
 
 #endif

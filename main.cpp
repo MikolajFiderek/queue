@@ -6,7 +6,8 @@ int main() {
     int choice, value;
     do {
         printf("\n1. Dodaj liczbe do kolejki\n");
-        printf("2. Koniec programu\n");
+        printf("2. Usun wartosc z kolejki\n");
+        printf("3. Koniec programu\n");
         printf("Wybierz opcje: ");
         scanf("%d", &choice);
 
@@ -17,13 +18,18 @@ int main() {
                 dodaj(value);
                 break;
             case 2:
+                value = usun();
+                if (value != -1)
+                    printf("Usunieto wartosc: %d\n", value);
+                break;
+            case 3:
                 printf("Koniec programu\n");
                 break;
             default:
                 printf("Niepoprawna opcja\n");
                 break;
         }
-    } while (choice != 2);
+    } while (choice != 3);
 
     return 0;
 }
