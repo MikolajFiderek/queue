@@ -8,7 +8,9 @@ int main() {
         printf("\n1. Dodaj liczbe do kolejki\n");
         printf("2. Usun wartosc z kolejki\n");
         printf("3. Sprawdz pierwsza wartosc z kolejki\n");
-        printf("4. Koniec programu\n");
+        printf("4. Sprawdz czy kolejka jest pusta\n");
+        printf("5. Sprawdz czy kolejka jest pelna\n");
+        printf("6. Koniec programu\n");
         printf("Wybierz opcje: ");
         scanf("%d", &choice);
 
@@ -29,13 +31,25 @@ int main() {
                     printf("Pierwsza wartosc w kolejce: %d\n", value);
                 break;
             case 4:
+                if (czyPusta())
+                    printf("Kolejka jest pusta\n");
+                else
+                    printf("Kolejka nie jest pusta\n");
+                break;
+            case 5:
+                if (czyPelna())
+                    printf("Kolejka jest pelna\n");
+                else
+                    printf("Kolejka nie jest pelna\n");
+                break;
+            case 6:
                 printf("Koniec programu\n");
                 break;
             default:
                 printf("Niepoprawna opcja\n");
                 break;
         }
-    } while (choice != 4);
+    } while (choice != 6);
 
     return 0;
 }
