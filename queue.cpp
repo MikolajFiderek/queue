@@ -1,48 +1,75 @@
 #include <stdio.h>
-#include "queue.h"
+#include <stdlib.h>
 
-int queue[MAX];
-int front = -1;
-int rear = -1;
+struct Queue {
+    int *elements;
+    int front;
+    int rear;
+    int size;
+};
 
-int czyPelna() {
-    return (rear + 1) % MAX == front;
+struct Queue *createQueue(int capacity) {
+    struct Queue *queue = (struct Queue *) malloc(sizeof(struct Queue));
+    if (!queue) {
+        printf("Błąd alokacji pamięci\n");
+        exit(1);
+    }
+    queue->elements = (int *) malloc(capacity * sizeof(int));
+    if (!queue->elements) {
+        printf("Błąd alokacji pamięci\n");
+        exit(1);
+    }
+    queue->front = -1;
+    queue->rear = -1;
+    queue->size = capacity;
+    return queue;
 }
 
-int czyPusta() {
-    return front == -1;
+int czyPelna(struct Queue *queue) {
+    return (queue->rear + 1) % queue->size == queue->front;
 }
 
-void dodaj(int value) {
-    if (czyPelna()) {
-        printf("Kolejka jest pelna\n");
+int czyPusta(struct Queue *queue) {
+    return queue->front == -1;
+}
+
+void dodaj(struct Queue *queue, int value) {
+    if (czyPelna(queue)) {
+        printf("Kolejka jest pełna\n");
         return;
     }
-    if (czyPusta()) {
-        front = 0;
+    if (czyPusta(queue)) {
+        queue->front = 0;
     }
-    rear = (rear + 1) % MAX;
-    queue[rear] = value;
+    queue->rear = (queue->rear + 1) % queue->size;
+    queue->elements[queue->rear] = value;
     printf("%d dodano do kolejki\n", value);
 }
-int usun() {
-    if (czyPusta()) {
+
+int usun(struct Queue *queue) {
+    if (czyPusta(queue)) {
         printf("Kolejka jest pusta\n");
         return -1;
     }
-    int value = queue[front];
-    if (front == rear) {
-        front = rear = -1;
+    int value = queue->elements[queue->front];
+    if (queue->front == queue->rear) {
+        queue->front = queue->rear = -1;
     } else {
-        front = (front + 1) % MAX;
+        queue->front = (queue->front + 1) % queue->size;
     }
     return value;
 }
 
-int pierwszaWartosc() {
-    if (czyPusta()) {
+int pierwszaWartosc(struct Queue *queue) {
+    if (czyPusta(queue)) {
         printf("Kolejka jest pusta\n");
         return -1;
     }
-    return queue[front];
+    return queue->elements[queue->front];
 }
+
+void zwolnijKolejke(struct Queue *queue) {
+    free(queue->elements);
+    free(queue);
+}
+

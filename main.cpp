@@ -3,6 +3,12 @@
 
 int main() {
 
+    int sizeOfQueue=0;
+
+    printf("podaj rozmiar kolejki: ");
+    scanf("%d", &sizeOfQueue);
+    struct Queue *queue = createQueue(sizeOfQueue);
+
     int choice, value;
     do {
         printf("\n1. Dodaj liczbe do kolejki\n");
@@ -18,32 +24,33 @@ int main() {
             case 1:
                 printf("Podaj liczbe do dodania: ");
                 scanf("%d", &value);
-                dodaj(value);
+                dodaj(queue,value);
                 break;
             case 2:
-                value = usun();
+                value = usun(queue);
                 if (value != -1)
                     printf("Usunieto wartosc: %d\n", value);
                 break;
             case 3:
-                value = pierwszaWartosc();
+                value = pierwszaWartosc(queue);
                 if (value != -1)
                     printf("Pierwsza wartosc w kolejce: %d\n", value);
                 break;
             case 4:
-                if (czyPusta())
+                if (czyPusta(queue))
                     printf("Kolejka jest pusta\n");
                 else
                     printf("Kolejka nie jest pusta\n");
                 break;
             case 5:
-                if (czyPelna())
+                if (czyPelna(queue))
                     printf("Kolejka jest pelna\n");
                 else
                     printf("Kolejka nie jest pelna\n");
                 break;
             case 6:
                 printf("Koniec programu\n");
+                zwolnijKolejke(queue);
                 break;
             default:
                 printf("Niepoprawna opcja\n");
